@@ -47,31 +47,57 @@ void InOrderTraversal2(BTree BT)
 
 void PostOrderTraversal2(BTree BT)
 {
+	if (!BT) return;
 	stack<BTree> S;
+	S.push(BT);
+	S.push(BT);
 	BTree T = BT;
-	while (T || !S.empty())
+	while (!S.empty())
 	{
-		while (T)
-		{
-			S.push(T);
-			S.push(T);
-			T = T->left;
-		}
-		
 		T = S.top();
 		S.pop();
-		if (T->left == NULL && T->right == NULL)
-			T = S.top();
-		else if (T == S.top())
+		if (!S.empty()&&T == S.top())
 		{
-			T = S.top()->right;
+			if (T->right)
+			{
+				S.push(T->right);
+				S.push(T->right);
+			}
+			if (T->left)
+			{
+				S.push(T->left);
+				S.push(T->left);
+			}
 		}
 		else
 		{
 			printf("%c", T->data);
-			T = S.top();
-			//直到找到一个相同的，没找到结束
-			
+		}
+	}
+}
+
+void PostOrderTraversal3(BTree BT)
+{
+	if (!BT) return;
+	stack<BTree> S;
+	S.push(BT);
+	BTree T = BT;
+	BTree last = BT;
+	while (!S.empty())
+	{
+		T = S.top();
+		if ((T->left == NULL&&T->right==NULL)|| (T->left == NULL && T->right == last)|| (T->left == last && T->right == NULL))
+		{
+			printf("%c", T->data);
+			last = T;
+			S.pop();
+		}
+		else
+		{
+			if (T->right)
+				S.push(T->right);
+			if (T->left)
+				S.push(T->left);
 		}
 	}
 }
