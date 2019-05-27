@@ -6,6 +6,8 @@ void PostOrderTraversal(BTree T);
 void PreOrderTraversal2(BTree T);
 void InOrderTraversal2(BTree T);
 void PostOrderTraversal2(BTree BT);
+void PostOrderTraversal3(BTree BT);
+void LevelTraversal(BTree BT);
 int main()
 {
 	TNode A, B, C, D, E, F, G, H, I;
@@ -50,17 +52,18 @@ int main()
 
 	PreOrderTraversal(BT);
 	printf("\n");
-	InOrderTraversal(BT);
-	printf("\n");
-	PostOrderTraversal(BT);
-	printf("\n");
+	//InOrderTraversal(BT);
+	//printf("\n");
+	//PostOrderTraversal(BT);
+	//printf("\n");
 
-	//non-recursion
+	////non-recursion
 	PreOrderTraversal2(BT);
 	printf("\n");
-	InOrderTraversal2(BT);
-	printf("\n");
-	PostOrderTraversal2(BT);
-	printf("\n");
+	//InOrderTraversal2(BT);
+	//printf("\n");
+	//PostOrderTraversal2(BT);
+	//printf("\n");
+	LevelTraversal(BT);
 	return 0;
 }
