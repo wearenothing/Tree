@@ -1,26 +1,43 @@
 
 #include<cstdio>
 #include<stack>
+#include<queue>
 #include"binarytree.h"
 using namespace std;
+//void PreOrderTraversal2(BTree BT)
+//{
+//	stack<BTree> S;
+//	BTree T = BT;
+//	while (T || !S.empty())
+//	{
+//		while (T)
+//		{
+//			S.push(T);
+//			printf("%c", T->data);
+//			T = T->left;
+//		}
+//		if (!S.empty())
+//		{
+//			T = S.top();
+//			S.pop();
+//			T = T->right;
+//		}
+//	}
+//}
 void PreOrderTraversal2(BTree BT)
 {
 	stack<BTree> S;
 	BTree T = BT;
-	while (T || !S.empty())
+	S.push(T);
+	while (!S.empty())
 	{
-		while (T)
-		{
-			S.push(T);
-			printf("%c", T->data);
-			T = T->left;
-		}
-		if (!S.empty())
-		{
-			T = S.top();
-			S.pop();
-			T = T->right;
-		}
+		T = S.top();
+		printf("%c", T->data);
+		S.pop();
+		if (T->right)
+			S.push(T->right);
+		if (T->left)
+			S.push(T->left);
 	}
 }
 
@@ -99,5 +116,25 @@ void PostOrderTraversal3(BTree BT)
 			if (T->left)
 				S.push(T->left);
 		}
+	}
+}
+
+
+void LevelTraversal(BTree BT)
+{
+	if (!BT)
+		return;
+	BTree T = BT;
+	queue<BTree> Q;
+	Q.push(T);
+	while (!Q.empty())
+	{
+		T = Q.front();
+		printf("%c", T->data);
+		Q.pop();
+		if (T->left)
+			Q.push(T->left);
+		if (T->right)
+			Q.push(T->right);
 	}
 }
